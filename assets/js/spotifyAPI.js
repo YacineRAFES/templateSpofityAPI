@@ -1,6 +1,8 @@
 import { get } from './getData.js';
-import { CONFIG } from '../../configdev/config.js';
+import { apiCall } from './utilitaires/listApiCall.js';
 
 export async function getCurrentlyPlayingTrack(){
-    get('/v1/me/player/currently-playing', CONFIG.SPOTIFY_CLIENT_SECRET)
+    const response = await get(apiCall.getCurrentlyPlayingTrack);
+    console.log(response);
+
 }

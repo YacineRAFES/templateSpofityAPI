@@ -1,3 +1,4 @@
-import { getCurrentlyPlayingTrack } from './spotifyAPI.js';
+import {apiCall} from './utilitaires/listApiCall.js';
+import {getCurrentlyPlayingTrack} from "./spotifyAPI.js";
 
-addEventListener("DOMContentLoaded", getCurrentlyPlayingTrack);
+console.log(getCurrentlyPlayingTrack());
