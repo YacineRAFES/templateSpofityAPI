@@ -1,31 +1,34 @@
 import { getAccessToken } from './getAccessToken.js';
+import { getAccessTokenStorage } from "./utilitaires/utils.js";
 
 export async function get(url) {
-    // Je vérifie si le token est déjà stocké dans le localStorage
-    let Token = localStorage.getItem('access_token');
-    // Si le token n'existe pas ou il est vide
-    if(Token==null || Token===''){
-        // J'appelle la fonction pour obtenir le AccessToken et je le stocke dans le localStorage
-        await getAccessToken();
-    }
-
-    let tentative = 0;
-    while(tentative < 3) {
+    try {
+        const data = localStorage.getItem('access_token');
+        if (!data) {
+            await getAccessToken();
+        } else {
+            const tokenData = JSON.parse(data);
+            if (Date.now() > tokenData.expires) {
+                await getAccessToken();
+            }
+        }
+        console.log(getAccessTokenStorage().access_token );
         const response = await fetch(url, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem('access_token')}`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${getAccessTokenStorage().access_token }`
             }
         });
-        const json = await response.json();
-
-        if (json.error && json.error.status < 400) {
-            await getAccessToken();
-            tentative++;
-            continue;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log(json);
-
+        const json = await response.json();
         return json;
+
+    }catch (error) {
+        console.error("Error in get function:", error);
+        throw error;
     }
+
 }

@@ -5,3 +5,4 @@ configdev/*
 node_modules/
 package-lock.json
 package.json
+assets/js/test.js
