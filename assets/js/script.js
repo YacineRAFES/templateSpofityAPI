@@ -2,7 +2,7 @@ import {apiCall} from './utilitaires/listApiCall.js';
 import {getCurrentlyPlayingTrack} from "./spotifyAPI.js";
 import {getAccessToken} from "./getAccessToken.js";
 import {timestamp_expires} from "./utilitaires/time.js";
-import {getmusicshit} from "./test.js";
+import {getmusic} from "./test.js";
 //
 // getAccessToken();
 
@@ -10,4 +10,4 @@ import {getmusicshit} from "./test.js";
 
 // getCurrentlyPlayingTrack();
 
-getmusicshit();
+getmusic();
