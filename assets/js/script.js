@@ -2,7 +2,7 @@ import {apiCall} from './utilitaires/listApiCall.js';
 import {getCurrentlyPlayingTrack} from "./spotifyAPI.js";
 import {getAccessToken} from "./getAccessToken.js";
 import {timestamp_expires} from "./utilitaires/time.js";
-import {getmusic} from "./test.js";
+import {askAuth, getmusic, getToken} from "./test.js";
 //
 // getAccessToken();
 
@@ -10,4 +10,13 @@ import {getmusic} from "./test.js";
 
 // getCurrentlyPlayingTrack();
 
-getmusic();
+// getmusic();
+
+document.getElementById('authorize').addEventListener('click', async () => askAuth());
+
+const urlParams = new URLSearchParams(window.location.search);
+let code = urlParams.get('code');
+
+getToken(code);
+
+document.getElementById('musicCurrently').addEventListener('click', async () => getmusic());
