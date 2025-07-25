@@ -27,3 +27,25 @@ export function base64encode(input){
         .replace(/\+/g, '-')
         .replace(/\//g, '_');
 }
+
+export function timestamp_expires(secondes) {
+
+    // Convert secondes to milliseconds
+    const millisecondsToAdd = secondes * 1000;
+
+    // Get the current timestamp
+    const currentTimestamp = Date.now();
+
+    // Add the milliseconds to the current timestamp and return the new timestamp
+    return currentTimestamp + millisecondsToAdd;
+
+}
+
+export function checkIfLocalStorageExists(key){
+    const data = localStorage.getItem(key);
+    if (data === null || data === undefined) {
+        console.log(`No data found for key: ${key}`);
+        return false;
+    }
+    return true;
+}

@@ -2,7 +2,14 @@ import { get } from './getData.js';
 import { apiCall } from './utilitaires/listApiCall.js';
 
 export async function getCurrentlyPlayingTrack(){
-    const response = await get(apiCall.getCurrentlyPlayingTrack);
-    console.log(response);
+    const json = await get(apiCall.getCurrentlyPlayingTrack);
+    console.log(json);
 
+    return {
+        album: json.item.name,
+        artist: json.item.artists[0].name,
+        image: json.item.album.images[0].url,
+        progess: json.progress_ms,
+        duration: json.item.duration_ms,
+    }
 }
