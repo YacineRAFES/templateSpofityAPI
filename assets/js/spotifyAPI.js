@@ -9,7 +9,7 @@ export async function getCurrentlyPlayingTrack(){
         album: json.item.name,
         artist: json.item.artists[0].name,
         image: json.item.album.images[0].url,
-        progess: json.progress_ms,
+        progress: json.progress_ms,
         duration: json.item.duration_ms,
     }
 }

@@ -49,3 +49,9 @@ export function checkIfLocalStorageExists(key){
     }
     return true;
 }
+
+export function millesecondsToTime(milleseconds){
+    const minutes = Math.floor(milleseconds / 60000);
+    const seconds = ((milleseconds % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
